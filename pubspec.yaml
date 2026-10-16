@@ -1,0 +1,432 @@
+```html
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" id="htmlRoot">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#021310">
+<title>أَثَر | Athar — رفيقك الروحي والقرآني الشامل</title>
+
+<!-- Tailwind CSS CDN -->
+<script src="https://cdn.tailwindcss.com"></script>
+<!-- Cairo & Amiri Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cairo:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --bg-primary: #021310;
+  --emerald-main: #059669;
+  --emerald-dark: #022018;
+  --gold-accent: #f59e0b;
+  --gold-gradient: linear-gradient(135deg, #fbbf24 0%, #d97706 100%);
+  --glass-card: rgba(3, 31, 24, 0.90);
+  --glass-border: rgba(52, 211, 153, 0.28);
+  --text-light: #f0fdf4;
+  --text-muted: #a7f3d0;
+  --shadow-card: 0 16px 36px -10px rgba(0, 0, 0, 0.75);
+  --font-quran: 'Amiri', serif;
+}
+
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+body {
+  margin: 0;
+  background-color: var(--bg-primary);
+  color: var(--text-light);
+  font-family: 'Cairo', sans-serif;
+  padding-bottom: 120px;
+  min-height: 100vh;
+  background-image: 
+    radial-gradient(circle at 50% 0%, rgba(5, 150, 105, 0.2) 0%, transparent 60%),
+    radial-gradient(circle at 100% 100%, rgba(217, 119, 6, 0.09) 0%, transparent 50%);
+  background-attachment: fixed;
+}
+
+.quran-text {
+  font-family: var(--font-quran);
+  line-height: 2.3;
+  word-spacing: 2px;
+}
+
+/* Islamic Geometric Pattern Overlay */
+.islamic-bg-pattern {
+  background-color: #021310;
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0l15 15-15 15-15-15L30 0zm0 60l15-15-15-15-15 15 30 15zM0 30l15 15 15-15-15-15L0 30zm60 0l-15 15-15-15 15-15 15 15z' fill='%23059669' fill-opacity='0.04' fill-rule='evenodd'/%3E%3C/svg%3E");
+}
+
+.glass-card {
+  background: var(--glass-card);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border);
+  border-radius: 22px;
+  padding: 18px;
+  margin-bottom: 14px;
+  box-shadow: var(--shadow-card);
+}
+
+header {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  background: rgba(2, 19, 16, 0.95);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(245, 158, 11, 0.25);
+  padding: 12px 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+}
+
+.page { display: none; opacity: 0; transform: translateY(6px); transition: opacity 0.25s ease, transform 0.25s ease; }
+.page.active { display: block; opacity: 1; transform: translateY(0); }
+
+/* Bottom iOS-style Navigation Bar */
+.ios-nav {
+  position: fixed;
+  bottom: 12px;
+  left: 10px;
+  right: 10px;
+  max-width: 480px;
+  margin: 0 auto;
+  z-index: 50;
+  background: rgba(2, 24, 20, 0.96);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(245, 158, 11, 0.3);
+  border-radius: 24px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 6px 4px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.85);
+}
+
+.ios-nav button {
+  background: transparent;
+  border: 0;
+  color: #a7f3d0;
+  font-size: 10px;
+  font-family: 'Cairo', sans-serif;
+  font-weight: 700;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  padding: 6px 2px;
+  border-radius: 16px;
+  flex: 1;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  white-space: nowrap;
+}
+
+.ios-nav button span:first-child { font-size: 17px; }
+
+.ios-nav button.active {
+  color: #ffffff;
+  background: linear-gradient(135deg, #059669 0%, #046c4e 100%);
+  border: 1px solid rgba(251, 191, 36, 0.4);
+  box-shadow: 0 4px 14px rgba(5, 150, 105, 0.45);
+}
+
+.mini-player {
+  position: fixed;
+  bottom: 80px;
+  left: 12px;
+  right: 12px;
+  max-width: 480px;
+  margin: 0 auto;
+  z-index: 45;
+  background: rgba(3, 31, 24, 0.98);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(245, 158, 11, 0.4);
+  border-radius: 20px;
+  padding: 10px 14px;
+  display: none;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.8);
+}
+
+/* Dynamic Hero Visualization Box */
+.prayer-hero-card {
+  position: relative;
+  border-radius: 26px;
+  overflow: hidden;
+  border: 1px solid rgba(245, 158, 11, 0.35);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.8);
+  transition: all 0.5s ease-in-out;
+}
+
+.prayer-hero-svg {
+  width: 100%;
+  height: 230px;
+  display: block;
+  transition: opacity 0.6s ease;
+}
+
+.waves { display: flex; gap: 3px; height: 22px; align-items: center; justify-content: center; }
+.waves i { display: block; width: 3px; height: 6px; border-radius: 3px; background: #fbbf24; }
+.waves.playing i { animation: waveAnim 0.4s ease-in-out infinite alternate; }
+.waves i:nth-child(1) { animation-delay: 0.0s; }
+.waves i:nth-child(2) { animation-delay: 0.12s; }
+.waves i:nth-child(3) { animation-delay: 0.24s; }
+.waves i:nth-child(4) { animation-delay: 0.08s; }
+.waves i:nth-child(5) { animation-delay: 0.2s; }
+@keyframes waveAnim { 
+  0% { height: 4px; background: #fbbf24; } 
+  100% { height: 22px; background: #34d399; box-shadow: 0 0 10px #34d399; } 
+}
+
+/* Audio Player Disc Animations */
+.islamic-player-disc {
+  width: 180px;
+  height: 180px;
+  margin: 0 auto 16px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #059669 0%, #021310 100%);
+  position: relative;
+  box-shadow: 0 20px 50px rgba(5, 150, 105, 0.35), inset 0 0 30px rgba(251, 191, 36, 0.3);
+  border: 3px solid rgba(251, 191, 36, 0.8);
+  overflow: hidden;
+}
+
+.islamic-player-disc-inner { position: absolute; inset: 0; border-radius: 50%; }
+.islamic-player-disc.spinning .islamic-player-disc-inner { animation: discSpin 22s linear infinite; }
+@keyframes discSpin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+.islamic-player-static-content {
+  position: absolute; inset: 0; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; z-index: 5; pointer-events: none;
+}
+
+.ios-sheet-overlay {
+  position: fixed; inset: 0; background: rgba(2, 19, 16, 0.88);
+  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  z-index: 100; opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
+}
+.ios-sheet-overlay.active { opacity: 1; pointer-events: auto; }
+.ios-sheet {
+  position: fixed; bottom: 0; left: 0; right: 0; z-index: 101;
+  background: linear-gradient(180deg, #032a20 0%, #021310 100%);
+  border-top: 2px solid rgba(245, 158, 11, 0.5);
+  border-radius: 28px 28px 0 0;
+  padding: 20px 16px calc(28px + env(safe-area-inset-bottom));
+  max-height: 85vh; overflow-y: auto; transform: translateY(100%);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.ios-sheet-overlay.active .ios-sheet { transform: translateY(0); }
+.sheet-handle { width: 42px; height: 5px; background: rgba(245, 158, 11, 0.4); border-radius: 10px; margin: 0 auto 16px; }
+
+/* Gold Badge & Text accents */
+.gold-text {
+  background: linear-gradient(135deg, #fef08a 0%, #f59e0b 50%, #d97706 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+</style>
+</head>
+<body class="islamic-bg-pattern">
+
+<header>
+  <div class="max-w-lg mx-auto flex justify-between items-center">
+    <div class="flex items-center gap-3">
+      <!-- Logo Branding -->
+      <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-[#047857] via-[#059669] to-[#fbbf24] p-0.5 flex items-center justify-center shadow-lg">
+        <div class="w-full h-full bg-[#021310] rounded-[14px] flex items-center justify-center">
+          <span class="text-lg">🕌</span>
+        </div>
+      </div>
+      <div>
+        <div class="text-base font-black text-white flex items-center gap-1.5 leading-tight">
+          <span>أَثَر</span> <span class="text-amber-400 font-normal text-xs">| Athar</span>
+        </div>
+        <div class="text-[10px] text-[#a7f3d0] font-bold flex items-center gap-1" id="liveClockDisplay">
+          <span>جاري المزامنة...</span>
+        </div>
+      </div>
+    </div>
+    <div class="flex items-center gap-2">
+      <button onclick="openBookmarksModal()" class="border border-amber-500/40 bg-emerald-950/70 px-3 py-1.5 rounded-2xl text-xs text-amber-300 font-bold shadow-sm hover:bg-emerald-900 transition flex items-center gap-1">
+        <span>⭐</span> <span>المفضلة</span>
+      </button>
+      <button onclick="go('settings')" class="p-2 border border-emerald-500/30 bg-emerald-950/70 rounded-2xl text-xs text-white hover:bg-emerald-900 transition">
+        ⚙️
+      </button>
+    </div>
+  </div>
+</header>
+
+<main class="max-w-lg mx-auto p-4 pt-3">
+
+  <section id="home" class="page active">
+    
+    <!-- Dates Card -->
+    <div class="bg-gradient-to-r from-emerald-950/90 via-[#03291f]/80 to-emerald-950/90 border border-amber-500/30 rounded-2xl p-3 mb-3.5 shadow-md">
+      <div class="grid grid-cols-2 gap-2 text-center divide-x divide-x-reverse divide-emerald-500/20">
+        <div class="pl-2">
+          <span class="text-[10px] text-amber-300/90 font-bold block mb-0.5">🌙 التاريخ الهجري</span>
+          <span id="hijriDateDisplay" class="text-xs text-white font-bold truncate block">--</span>
+        </div>
+        <div class="pr-2">
+          <span class="text-[10px] text-[#34d399] font-bold block mb-0.5">☀️ التاريخ الميلادي</span>
+          <span id="gregorianDateDisplay" class="text-xs text-white font-bold truncate block">--</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- DYNAMIC PRAYER HERO VISUALIZER CARD -->
+    <div class="prayer-hero-card mb-4 bg-[#021310] relative">
+      <div id="heroSvgContainer" class="relative overflow-hidden">
+        <!-- SVG Canvas rendered dynamically via JavaScript based on actual prayer period -->
+      </div>
+      <div class="absolute inset-0 bg-gradient-to-t from-[#021310] via-transparent to-black/30 pointer-events-none"></div>
+      
+      <!-- Overlaid Details -->
+      <div class="absolute bottom-0 inset-x-0 p-4 text-center z-10">
+        <div class="flex items-center justify-center gap-1 text-xs text-amber-200 font-bold mb-1 drop-shadow-md">
+          <span>📍</span> <span id="cityNameDisplay">القاهرة الكبرى</span>
+          <button onclick="requestUserGPSLocation()" class="mr-2 px-2 py-0.5 bg-emerald-700/80 hover:bg-emerald-600 border border-emerald-400/40 text-white rounded-xl text-[10px] font-bold transition">GPS 📍</button>
+        </div>
+        <div class="text-[11px] text-[#34d399] font-bold uppercase tracking-wider" id="currentPeriodLabel">الصلاة القادمة</div>
+        <div class="text-3xl font-black my-0.5 text-white drop-shadow-lg gold-text" id="nextPrayerName">--</div>
+        <div class="text-2xl font-extrabold text-amber-300 mb-2 font-mono drop-shadow-md" id="nextPrayerTime">--:--</div>
+        <div class="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-emerald-900/90 border border-amber-400/50 text-emerald-100 text-xs font-bold shadow-lg" id="nextPrayerCountdown">
+          جاري حساب الوقت...
+        </div>
+      </div>
+    </div>
+
+    <!-- Prayer Times Grid -->
+    <div class="glass-card">
+      <div class="flex justify-between items-center mb-3">
+        <h2 class="text-xs font-bold text-white flex items-center gap-1.5">
+          <span class="text-amber-400">🕌</span> <span>مواقيت الصلاة اليومية</span>
+        </h2>
+        <span class="text-[10px] text-amber-300 font-semibold bg-emerald-950 px-2 py-0.5 rounded-lg border border-amber-500/20">هيئة المساحة المصرية</span>
+      </div>
+      <div class="grid grid-cols-3 gap-2" id="prayersGrid"></div>
+    </div>
+
+    <!-- Live Quran Radio Card -->
+    <div onclick="playLiveRadio()" class="glass-card cursor-pointer bg-gradient-to-r from-emerald-950/90 via-[#033326]/90 to-emerald-950/90 border border-amber-500/40 p-3.5 flex items-center justify-between hover:border-amber-400 transition shadow-lg mb-4">
+      <div class="flex items-center gap-3">
+        <div class="w-11 h-11 rounded-2xl bg-gradient-to-br from-amber-500 to-emerald-700 text-white flex items-center justify-center text-lg font-bold shadow-md animate-pulse">📻</div>
+        <div>
+          <div class="text-xs font-extrabold text-white flex items-center gap-1.5">
+            إذاعة القرآن الكريم مباشر <span class="inline-block w-2 h-2 rounded-full bg-red-500 animate-ping"></span>
+          </div>
+          <div class="text-[10px] text-[#a7f3d0]">بث مباشر من القاهرة على مدار الساعة</div>
+        </div>
+      </div>
+      <span class="text-[11px] font-bold bg-amber-500/20 text-amber-300 border border-amber-500/40 px-3 py-1 rounded-xl">استماع ♫</span>
+    </div>
+
+    <!-- Quick Features Grid -->
+    <div class="mb-4">
+      <h2 class="text-xs font-bold text-white mb-2 px-1 flex items-center justify-between">
+        <span>⚡ الخدمات القرآنية والإسلامية</span>
+      </h2>
+      <div class="grid grid-cols-2 gap-2.5">
+        <div onclick="go('quran')" class="glass-card mb-0 cursor-pointer p-3 flex items-center gap-2.5 hover:border-amber-400 transition">
+          <div class="w-10 h-10 rounded-xl bg-emerald-900/80 text-amber-300 flex items-center justify-center text-lg font-bold border border-amber-500/30">📖</div>
+          <div>
+            <h3 class="text-xs font-bold text-white">المصحف الكامل</h3>
+            <p class="text-[9px] text-[#a7f3d0]">114 سورة بقراءة وتلاوة</p>
+          </div>
+        </div>
+        <div onclick="go('readers')" class="glass-card mb-0 cursor-pointer p-3 flex items-center gap-2.5 hover:border-amber-400 transition">
+          <div class="w-10 h-10 rounded-xl bg-emerald-900/80 text-amber-300 flex items-center justify-center text-lg font-bold border border-amber-500/30">🎙️</div>
+          <div>
+            <h3 class="text-xs font-bold text-white">كبار القراء</h3>
+            <p class="text-[9px] text-[#a7f3d0]">15 شيخاً ومقرئاً معتمداً</p>
+          </div>
+        </div>
+        <div onclick="go('adhkar')" class="glass-card mb-0 cursor-pointer p-3 flex items-center gap-2.5 hover:border-amber-400 transition">
+          <div class="w-10 h-10 rounded-xl bg-emerald-900/80 text-amber-300 flex items-center justify-center text-lg font-bold border border-amber-500/30">📿</div>
+          <div>
+            <h3 class="text-xs font-bold text-white">السبحة والأذكار</h3>
+            <p class="text-[9px] text-[#a7f3d0]">حصن المسلم اليومي</p>
+          </div>
+        </div>
+        <div onclick="go('qibla')" class="glass-card mb-0 cursor-pointer p-3 flex items-center gap-2.5 hover:border-amber-400 transition">
+          <div class="w-10 h-10 rounded-xl bg-emerald-900/80 text-amber-300 flex items-center justify-center text-lg font-bold border border-amber-500/30">🧭</div>
+          <div>
+            <h3 class="text-xs font-bold text-white">بوصلة القبلة</h3>
+            <p class="text-[9px] text-[#a7f3d0]">تحديد اتجاه الكعبة</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="quran" class="page">
+    <!-- View Mode Switch: Index vs Quran Reader -->
+    <div id="quranIndexView">
+      <div class="glass-card">
+        <div class="flex justify-between items-center mb-2">
+          <h2 class="text-sm font-bold text-white flex items-center gap-2"><span>📖</span> <span>سور القرآن الكريم</span></h2>
+          <span class="text-[11px] text-amber-300 font-bold bg-emerald-950 px-2.5 py-0.5 rounded-full border border-amber-500/30">114 سورة</span>
+        </div>
+        <p class="text-[11px] text-[#a7f3d0] mb-3">اقرأ واستمع إلى السور القرآنية المباركة بصوت قراء العالم الإسلامي.</p>
+        <div class="relative mb-3">
+          <input id="surahSearch" placeholder="ابحث عن اسم السورة (مثل: البقرة، الكهف، يس)..." oninput="renderSurahs()" class="w-full bg-emerald-950/90 border border-emerald-500/40 text-white placeholder-[#a7f3d0]/60 px-3.5 py-2.5 rounded-2xl text-xs outline-none focus:border-amber-400 transition shadow-sm">
+        </div>
+        <div id="quranList" class="space-y-2 max-h-[62vh] overflow-y-auto pr-1"></div>
+      </div>
+    </div>
+
+    <!-- Surah Text Viewer View -->
+    <div id="surahTextView" class="hidden">
+      <div class="glass-card">
+        <div class="flex justify-between items-center border-b border-emerald-500/30 pb-3 mb-3">
+          <button onclick="closeSurahText()" class="px-3 py-1 bg-emerald-900/80 border border-emerald-500/30 text-white rounded-xl text-xs font-bold">← العودة للفهرس</button>
+          <div class="text-center">
+            <h2 id="surahTitleDisplay" class="text-base font-extrabold text-amber-300">سورة --</h2>
+            <span id="surahMetaDisplay" class="text-[10px] text-[#a7f3d0]">مكية • آياتها --</span>
+          </div>
+          <button onclick="listenToCurrentSurahFromReader()" class="px-3 py-1 bg-gradient-to-r from-emerald-600 to-emerald-700 text-white rounded-xl text-xs font-bold shadow">استماع ♫</button>
+        </div>
+
+        <!-- Font Size Adjuster Controls -->
+        <div class="flex justify-between items-center bg-emerald-950/80 border border-emerald-500/30 px-3 py-1.5 rounded-xl mb-4">
+          <span class="text-[11px] text-[#a7f3d0]">حجم الخط:</span>
+          <div class="flex gap-2 items-center">
+            <button onclick="adjustQuranFontSize(-2)" class="w-7 h-7 bg-emerald-900 border border-emerald-500/30 rounded-lg text-white font-bold text-xs">-</button>
+            <span id="quranFontSizeLabel" class="text-xs text-white font-mono">22px</span>
+            <button onclick="adjustQuranFontSize(2)" class="w-7 h-7 bg-emerald-900 border border-emerald-500/30 rounded-lg text-white font-bold text-xs">+</button>
+          </div>
+        </div>
+
+        <!-- Quran Verses Box -->
+        <div id="surahVersesContainer" class="quran-text text-center text-white text-xl leading-loose max-h-[60vh] overflow-y-auto px-2 space-y-4">
+          جاري تحميل السورة الشريفة...
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="readers" class="page">
+    <div class="glass-card">
+      <h2 class="text-sm font-bold text-white mb-1 flex items-center gap-2"><span>🎙️</span> <span>نخبة القراء والمؤذنين</span></h2>
+      <p class="text-[11px] text-[#a7f3d0] mb-3">اختر القارئ المفضل لديك لسماع السور بإنصات وتدبر.</p>
+      <input id="readerSearch" placeholder="ابحث باسم القارئ..." oninput="renderReaders()" class="w-full bg-emerald-950/90 border border-emerald-500/40 text-white placeholder-[#a7f3d0]/60 px-3.5 py-2.5 rounded-2xl text-xs outline-none focus:border-amber-400 transition mb-3 shadow-sm">
+      <div id="readerList" class="space-y-2 max-h-[62vh] overflow-y-auto pr-1"></div>
+    </div>
+  </section>
+
+  <section id="adhkar" class="page">
+    <div class="glass-card text-center py-4">
+      <h2 class="text-sm font-bold text-white mb-1 flex items-center justify-center gap-2"><span>📿</span> <span>السبحة الرقمية والأذكار</span></h2>
+      <p class="text-[11px] text-[#a7f3d0] mb-3.5">«أَلا بِذِكْرِ اللَّهِ تَطْمَئِنُّ الْقُلُوبُ»</p>
+      
+      <!-- Digital Tasbih Box -->
+      <div class="bg-gradient-to-b from-emerald-900/90 via-[#033023] to-emerald-950/95 border border-amber-500/40 rounded-3xl p-5 mb-4 shadow-xl relative overflow-hidden">
+        <div class="text-xs text-amber-200 font-bold mb-1" id="dhikrTitle">سبحان الله وبحمده، سبحان الله العظيم</div>
+        <div class="text-5xl font-black text-amber-300 my-3 font-mono tracking-wider drop-shadow-md" id="tasbihCount">0</div>
+        <div class="flex justify-center gap-3">
+          <button onclick="incrementTasbih()" class="px-8 py-3 rounded-2xl bg-gradient-to-r from-amber-500 to-emerald-600 text-white font-bold text-sm shadow-lg hover:scale-105 active:scale-95 transition border border-amber-300/40 flex items-center gap-2">
+            <span>تسبيح</span> <span>+1</span>
+          </button>
+          <button onclick="resetTasbih()" class="px-4 py-3 rounded-2xl bg-emerald-950/80 text-amber-300 text-xs font-bold border border-amber-500/30 hover:bg-emerald-900 transition">
+            إعادة ⟳
+          </button>
+        </div>
